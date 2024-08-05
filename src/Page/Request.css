@@ -1,0 +1,90 @@
+.request-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  .request-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .request-money {
+    margin-bottom: 20px;
+  }
+  
+  .request-money label,
+  .request-message-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .request-money input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 30px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .currency {
+    position: absolute;
+    right: 10px;
+    color: #666;
+  }
+  
+  .request-message-container {
+    margin-bottom: 20px;
+  }
+  
+  .request-message-container textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    box-sizing: border-box;
+  }
+  
+  .request-submit-button button {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #ff6b6b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .request-submit-button button:hover {
+    background-color: #ff5252;
+  }
+  
+  @media (max-width: 480px) {
+    .request-container {
+      padding: 15px;
+    }
+  
+    .request-money input,
+    .request-message-container textarea,
+    .request-submit-button button {
+      font-size: 14px;
+    }
+  }

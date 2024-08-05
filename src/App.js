@@ -1,18 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
-import Home from './Home';
-import RecipientList from './RecipientList';
+import AppRoutes from './routes';
 
 function App() {
   return (
     <Router>
-      <div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/recipients" element={<RecipientList />} />
-        </Routes>
-      </div>
+      <AppRoutes />
     </Router>
   );
 }

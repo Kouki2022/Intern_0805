@@ -1,0 +1,88 @@
+.container {
+    height: 844px;
+    width: 390px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    position: relative; /* 必要: ボタンの位置を調整するため */
+  }
+  
+  .header {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    z-index: 1;
+  }
+  
+  .header h1 {
+    margin-bottom: 20px;
+  }
+  
+  .search-box {
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    bottom: 20px; /* 画面下部に配置 */
+    padding: 0 20px; /* 左右に余白を追加 */
+    box-sizing: border-box;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .back-button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .invoice-button {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .recipient-list {
+    flex: 1;
+    width: 100%;
+    max-width: 400px;
+    overflow-y: auto; /* scroll から auto に変更 */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 80px; /* buttons の高さ分の余白を確保 */
+  }
+  
+  .recipient-button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .recipient-icon {
+    margin-right: 10px;
+    font-size: 24px;
+  }
+  

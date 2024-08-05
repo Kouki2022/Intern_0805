@@ -4,27 +4,36 @@ import './Request_link.css';
 const Request_link = () => {
   const [linkCopied, setLinkCopied] = useState(false);
 
+  //リンクをコピーする処理
   const handleCopyLink = () => {
-    // 実際のリンクをクリップボードにコピーする処理をここに実装
     navigator.clipboard.writeText('https://example.com/request-link');
     setLinkCopied(true);
-    setTimeout(() => setLinkCopied(false), 2000); // 2秒後に表示を元に戻す
+    setTimeout(() => setLinkCopied(false), 2000);
+  };
+
+  //トップ画面に戻る処理
+  const handleTop = () => {
+    console.log('トップ画面に戻る');
   };
 
   return (
     <div className="request-link-created">
       <h2>請求リンクが作成されました</h2>
-      <div style={{ fontSize: '64px', color: 'green' }}>✔️</div>
-      <div className="link-display">
-      'https://example.com/request-link'
+      <div className="check-mark">
+        <svg viewBox="0 0 24 24">
+          <path fill="#4CAF50" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
       </div>
-      <button 
-        className={`copy-button ${linkCopied ? 'copied' : ''}`} 
+      <div className="link-display">
+        https://example.com/request-link
+      </div>
+      <button
+        className={`copy-button ${linkCopied ? 'copied' : ''}`}
         onClick={handleCopyLink}
       >
         {linkCopied ? 'コピーしました！' : 'リンクをコピー'}
       </button>
-      <button className="back-button">トップ画面に戻る</button>
+      <button className="back-button" onClick={handleTop}>トップ画面に戻る</button>
     </div>
   );
 };

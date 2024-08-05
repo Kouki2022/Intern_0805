@@ -1,27 +1,31 @@
 .request-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 600px;
+    width: 90%;
+    margin: 5vh auto;
+    padding: 4vh 5vw;
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 90vh;
     box-sizing: border-box;
   }
   
   .request-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 20px;
+    font-size: clamp(20px, 5vw, 28px);
     color: #333;
+    margin-bottom: 4vh;
+    text-align: center;
   }
   
-  .request-money {
-    margin-bottom: 20px;
+  .request-money1, .request-message-container {
+    margin-bottom: 4vh;
   }
   
-  .request-money label,
-  .request-message-container label {
+  label {
     display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
+    margin-bottom: 1vh;
+    font-size: clamp(14px, 3.5vw, 18px);
     color: #666;
   }
   
@@ -31,42 +35,34 @@
     align-items: center;
   }
   
-  .request-money input {
+  input[type="number"], textarea {
     width: 100%;
-    padding: 10px;
-    padding-right: 30px;
-    font-size: 16px;
+    padding: 2vh 3vw;
+    font-size: clamp(16px, 4vw, 20px);
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
   }
   
   .currency {
     position: absolute;
-    right: 10px;
+    right: 3vw;
+    font-size: clamp(16px, 4vw, 20px);
     color: #666;
   }
   
-  .request-message-container {
-    margin-bottom: 20px;
-  }
-  
-  .request-message-container textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  textarea {
+    height: 15vh;
+    min-height: 100px;
     resize: vertical;
-    box-sizing: border-box;
   }
   
   .request-submit-button button {
     width: 100%;
-    padding: 15px;
-    font-size: 16px;
+    padding: 2vh 0;
+    font-size: clamp(16px, 4vw, 20px);
     color: white;
-    background-color: #ff6b6b;
+    background-color: #fc7b7b;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -74,17 +70,38 @@
   }
   
   .request-submit-button button:hover {
-    background-color: #ff5252;
+    background-color: #f94444;
   }
   
-  @media (max-width: 480px) {
+  @media (min-width: 768px) {
     .request-container {
-      padding: 15px;
+      padding: 5vh 5vw;
     }
   
-    .request-money input,
-    .request-message-container textarea,
+    .request-title {
+      margin-bottom: 5vh;
+    }
+  
+    .request-money1, .request-message-container {
+      margin-bottom: 5vh;
+    }
+  
+    input[type="number"], textarea {
+      padding: 1.5vh 2vw;
+    }
+  
+    .currency {
+      right: 2vw;
+    }
+  
     .request-submit-button button {
-      font-size: 14px;
+      padding: 1.5vh 0;
+    }
+  }
+  
+  @media (min-height: 800px) {
+    .request-container {
+      justify-content: flex-start;
+      padding-top: 10vh;
     }
   }

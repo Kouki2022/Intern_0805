@@ -7,7 +7,7 @@ import Request_link from './Page/Request_link.js';
 function App() {
   return (
     <div>
-      <Request_link/>
+      <Request/>
     </div>
   );
 }

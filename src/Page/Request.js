@@ -17,7 +17,7 @@ const Request = () => {
     <div className='request-container'>
       <h2 className='request-title'>請求リンクの作成</h2>
       <form onSubmit={handleSubmit}>
-        <div className='request-money'>
+        <div className='request-money1'>
           <label htmlFor="amount">請求金額</label>
           <div className="input-wrapper">
             <input type="number" id="amount" placeholder="3000" ref={amountRef} />

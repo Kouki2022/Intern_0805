@@ -6,7 +6,6 @@ const Request_link = () => {
 
   const handleCopyLink = () => {
     // 実際のリンクをクリップボードにコピーする処理をここに実装
-    // この例ではダミーのリンクを使用
     navigator.clipboard.writeText('https://example.com/request-link');
     setLinkCopied(true);
     setTimeout(() => setLinkCopied(false), 2000); // 2秒後に表示を元に戻す

@@ -24,7 +24,6 @@ const Person = () => {
                     <span className='Person-currency'>¥</span>
                     <span className='amount'>3,250,000</span>
                 </div>
-                <button className='details-button'>残高の詳細</button>
             </div>
         </div>
     );

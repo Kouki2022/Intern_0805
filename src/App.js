@@ -5,11 +5,12 @@ import TopPage from './Page/TopPage.js';
 import Request_link from './Page/Request_link.js';
 import RecipientList from './Page/RecipientList.js';
 import PaymentScreen from './Page/PaymentScreen.js';
+import TransitionHistory from './Page/TransitionHistory.js';  
 
 function App() {
   return (
     <div>
-      <TopPage/>
+      <TransitionHistory/>
     </div>
   );
 }

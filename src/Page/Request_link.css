@@ -1,6 +1,5 @@
 .request-link-created {
-    max-width: 400px;
-    width: 90%;
+    width: 80%;
     margin:auto;
     padding: 10px;
     font-family: Arial, sans-serif;
@@ -11,15 +10,15 @@
     min-height: 90vh;
   }
   
-  h2 {
-    font-size: 5vw;
+  .request-link-title{
+    font-size: 6vw;
     color: #333;
     margin-bottom: 4vh;
   }
   
   .check-mark {
-    width: 50vw;
-    height: 50vw;
+    width: 40vw;
+    height: 40vw;
     max-width: 800px;
     max-height: 800px;
     background-color: #e8f5e9;
@@ -42,7 +41,7 @@
     padding: 3vh 10px;
     margin-bottom: 4vh;
     word-break: break-all;
-    font-size: 3.5vw;
+    font-size: 4vw;
   }
   
   button {

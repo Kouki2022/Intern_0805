@@ -62,7 +62,7 @@
     padding: 2vh 0;
     font-size: clamp(16px, 4vw, 20px);
     color: white;
-    background-color: #fc7b7b;
+    background-color: #ff6262;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -71,6 +71,11 @@
   
   .request-submit-button button:hover {
     background-color: #f94444;
+  }
+  .error-message {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 5px;
   }
   
   @media (min-width: 768px) {

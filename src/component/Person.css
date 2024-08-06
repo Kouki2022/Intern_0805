@@ -1,0 +1,87 @@
+.person-wrapper {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.person-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.user-details h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.account-number {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.balance-card {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.balance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.balance-text {
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+}
+
+.refresh-button {
+  color: #0c4da2 !important;
+  padding: 8px !important;
+  width:2vh;
+}
+
+.refresh-button:hover {
+  background-color: rgba(12, 77, 162, 0.1) !important;
+}
+
+.balance-amount {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.Person-currency {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.details-button {
+  background: none;
+  border: none;
+  color: #0c4da2;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.details-button:hover {
+  text-decoration: underline;
+}

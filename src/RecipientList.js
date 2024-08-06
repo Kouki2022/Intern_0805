@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './CommonStyles.css';
+import './RecipientList.css';
 
 function RecipientList() {
   const navigate = useNavigate();
@@ -11,43 +11,32 @@ function RecipientList() {
     { id: 3, name: '佐藤 花子', icon: '👩' },
   ];
 
-  const handleRecipientSelect = () => {
-    navigate('/send');
+  const handleRecipientSelect = (recipient) => {
+    navigate('/send', { state: { recipient } });
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '50vh', justifyContent: 'center', padding: '20px' }}>
-      <h1 style={{ marginBottom: '20px' }}>送金相手を選択</h1>
-      <div style={{ width: '100%', maxWidth: '400px' }}>
-        {recipients.map(recipient => (
-          <button
-            key={recipient.id}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              width: '100%',
-              marginBottom: '10px',
-              padding: '10px',
-              background: '#f0f0f0',
-              border: '1px solid #ccc',
-              borderRadius: '5px',
-              cursor: 'pointer'
-            }}
-            onClick={handleRecipientSelect}
-          >
-            <span style={{marginRight:'10px',fontSize: '24px'}}>
-              {recipient.icon}
-            </span>
-            <span>{recipient.name}</span>
-          </button>
-        ))}
+    <div className="recipient-list-container">
+      <div className="header3">
+        <button className="back-button" onClick={() => navigate('/')}>
+          戻る
+        </button>
+        <h1>送金相手を選択</h1>
       </div>
-      <button 
-        onClick={() => navigate('/')}
-        className="back-button"
-      >
-        戻る
-      </button>
+      <div className="content-wrapper3">
+        <div className="action-buttons">
+          {recipients.map(recipient => (
+            <button
+              key={recipient.id}
+              className="action-button recipient-button"
+              onClick={() => handleRecipientSelect(recipient)}
+            >
+              <span className="icon">{recipient.icon}</span>
+              {recipient.name}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -31,7 +31,7 @@ const TopPage = () => {
   return (
     <div className="toppage-container">
       <header className="app-header">
-        <h1>MUFG Quick Transfer</h1>
+        <h1>Quick Transfer</h1>
       </header>
       <main className="content-wrapper">
         <Person />

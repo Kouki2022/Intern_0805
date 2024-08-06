@@ -1,26 +1,39 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './CommonStyles.css';
 
 function CompletionScreen() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { amount, recipient, message } = location.state || {};
 
   const handleBackToHome = () => {
     navigate('/', { replace: true });
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#f7f7f7' }}>
-      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-      <div style={{ display: 'flex',alignItems: 'center',justifyContent: 'center', width: '100px', height: '100px', borderRadius: '50%', backgroundColor: '#e0ffe0', fontSize: '64px', color: 'green' }}>✔️</div>
-        <h2 style={{ margin: '20px 0' }}>送金処理が完了しました</h2>
+    <div className="completion-container">
+      <div className="header3">
+        <h1>送金完了</h1>
       </div>
-      <button 
-        onClick={handleBackToHome}
-        className="back-button"
-      >
-        トップ画面に戻る
-      </button>
+      <div className="content-wrapper3">
+        <div className="completion-content">
+          <div className="completion-icon">✔️</div>
+          <h2>送金処理が完了しました</h2>
+          {amount && recipient && (
+            <p>{recipient}様へ{amount}円を送金しました。</p>
+          )}
+          {message && (
+            <p>メッセージ: {message}</p>
+          )}
+        </div>
+        <button 
+          onClick={handleBackToHome}
+          className="back-to-home-button"
+        >
+          トップ画面に戻る
+        </button>
+      </div>
     </div>
   );
 }

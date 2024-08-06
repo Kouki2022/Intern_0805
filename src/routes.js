@@ -1,20 +1,30 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import TopPage from './TopPage'; // または './Home' （ファイル名を変更しなかった場合）
+import { Routes, Route, Navigate } from 'react-router-dom';
+import TopPage from './TopPage';
 import RecipientList from './RecipientList';
 import HelloWorld from './HelloWorld';
 import CompletionScreen from './CompletionScreen';
-import Request from './Request'; 
+import Login from './Login';
+import Request from './Request'
+import { useAuth } from './AuthContext';
+
+function PrivateRoute({ children }) {
+  const { isLoggedIn } = useAuth();
+  return isLoggedIn ? children : <Navigate to="/login" replace />;
+}
 
 function AppRoutes() {
+  const { isLoggedIn } = useAuth();
+
   return (
     <Routes>
-      <Route path="/" element={<TopPage />} />
-      <Route path="/recipients" element={<RecipientList />} />
-      <Route path="/send" element={<HelloWorld />} />
-      <Route path="/completion" element={<CompletionScreen />} />
-      <Route path="/request" element={<Request />} /> 
-
+      <Route path="/login" element={isLoggedIn ? <Navigate to="/" replace /> : <Login />} />
+      <Route path="/" element={<PrivateRoute><TopPage /></PrivateRoute>} />
+      <Route path="/recipients" element={<PrivateRoute><RecipientList /></PrivateRoute>} />
+      <Route path="/send" element={<PrivateRoute><HelloWorld /></PrivateRoute>} />
+      <Route path="/completion" element={<PrivateRoute><CompletionScreen /></PrivateRoute>} />
+      <Route path="/request" element={<PrivateRoute><Request /></PrivateRoute>} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

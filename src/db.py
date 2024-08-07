@@ -40,33 +40,18 @@ CREATE TABLE IF NOT EXISTS transactions (
 ''')
 
 # テストデータの挿入
-with open('./images/icon1.png', 'rb') as f:
-    icon1 = f.read()
-with open('./images/icon2.png', 'rb') as f:
-    icon2 = f.read()
-with open('./images/icon3.png', 'rb') as f:
-    icon3 = f.read()
-with open('./images/icon4.png', 'rb') as f:
-    icon4 = f.read()
-with open('./images/icon5.png', 'rb') as f:
-    icon5 = f.read()
-with open('./images/icon6.png', 'rb') as f:
-    icon6 = f.read()
-# テストデータの挿入
 users_data = [
-    #   password  名前     icon   残高     口座番号  tourokuzumiid
-    (1, '7464', '田中花子', icon1, 1000.0, 123456, 101),
-    (2, '2237', '鈴木かける', icon2, 1500.0, 123457, 102),
-    (3, '6908', '佐藤修二', icon3, 2000.0, 123458, 103),
-    (4, '4637', '安藤太郎', icon4, 2500.0, 123459, 104),
-    (5, '4322', '池上温子', icon5, 3000.0, 123460, 105),
-    (6, '1234', '田川七', icon6, 3500.0, 123461, 106),
-    (7, '4443', '上野篤俊', icon1, 4000.0, 123462, 107),
-    (8, '8393', '太田正', icon2, 4500.0, 123463, 108),
-    (9, '3438', '高橋吉', icon3, 5000.0, 123464, 109),
-    (10, '1432', '小川宗孝', icon4, 5500.0, 123465, 110)
+    (1, 'password1', '山田 太郎', None, 50000.0, 123456, 1001),
+    (2, 'password2', 'User2', None, 1500.0, 123457, 1002),
+    (3, 'password3', 'User3', None, 2000.0, 123458, 1003),
+    (4, 'password4', 'User4', None, 2500.0, 123459, 1004),
+    (5, 'password5', 'User5', None, 3000.0, 123460, 1005),
+    (6, 'password6', 'User6', None, 3500.0, 123461, 1006),
+    (7, 'password7', 'User7', None, 4000.0, 123462, 1007),
+    (8, 'password8', 'User8', None, 4500.0, 123463, 1008),
+    (9, 'password9', 'User9', None, 5000.0, 123464, 1009),
+    (10, 'password10', 'User10', None, 5500.0, 123465, 1010)
 ]
-
 
 cursor.executemany('''
 INSERT INTO users (id, password, user_name, photo, balance, account_number, registered_id)
@@ -108,23 +93,17 @@ def get_data_sender(sender_id):
 
 
 #ログイン時に使用
-# db.py (関連する部分のみ)
-
 def account_search(account_number, password):
     conn = sqlite3.connect(dbFile)
     c = conn.cursor()
-    c.execute('SELECT * FROM users WHERE account_number = ? AND password = ?', (account_number, password))
+    c.execute('select * from users where account_number =  ? AND password = ?', (account_number, password))
     user = c.fetchone()
+    conn.commit()
     conn.close()
     if user:
-        return {
-            "id": user[0],
-            "user_name": user[2],
-            "balance": user[4],
-            "account_number": user[5],
-            "registered_id": user[6]
-        }
-    return None
+        return user
+    else:
+        return False
 
 
 #送金の履歴をデータベースに追加
@@ -144,14 +123,6 @@ def insert_send(sender_id, receiver_id, amount, type,  message, determination):
     conn.commit()
     conn.close()
     return True
-
-def insert_past(data):
-    conn = sqlite3.connect(dbFile)
-    cursor = conn.cursor()
-    cursor.execute('''INSERT INTO transactions (sender_id, receiver_id, amount, type, message, determination)
-    VALUES (?, ?, ?, ?, ?, ?)''', data)
-    conn.commit()
-    conn.close()
 
 
 # 送金の時の残高計算
@@ -208,6 +179,33 @@ def balance_send(sender_id, receiver_id, amount):
     return True
 
 
+#recipientを取得
+def get_recip(id1, id2, id3, id4):
+    conn = sqlite3.connect(dbFile)
+    cursor = conn.cursor()
+
+    # レコードを取得
+    cursor.execute('SELECT * FROM users WHERE id = ?', (id1,))
+    record1 = cursor.fetchone()
+
+    cursor.execute('SELECT * FROM users WHERE id = ?', (id2,))
+    record2 = cursor.fetchone()
+
+    cursor.execute('SELECT * FROM users WHERE id = ?', (id3,))
+    record3 = cursor.fetchone()
+
+    cursor.execute('SELECT * FROM users WHERE id = ?', (id4,))
+    record4 = cursor.fetchone()
+
+    # レコードをリストにまとめる
+    records = [record1, record2, record3, record4]
+
+    # データベース接続を閉じる
+    conn.close()
+
+    return records
+
+
 
 
 
@@ -248,27 +246,3 @@ for transaction in transactions:
 # データベース接続の閉鎖
 conn.commit()
 conn.close()
-
-import hashlib
-
-def account_search(account_number, password):
-    conn = sqlite3.connect(dbFile)
-    c = conn.cursor()
-    c.execute('SELECT * FROM users WHERE account_number = ?', (account_number,))
-    user = c.fetchone()
-    conn.close()
-    if user:
-        # パスワードをハッシュ化して比較
-        hashed_password = hashlib.sha256(password.encode()).hexdigest()
-        if hashed_password == user[1]:  # user[1]がパスワードフィールド
-            return user
-    return False
-
-# db.py
-def get_all_recipients():
-    conn = sqlite3.connect(dbFile)
-    c = conn.cursor()
-    c.execute('SELECT id, user_name, photo, account_number FROM users')
-    recipients = c.fetchall()
-    conn.close()
-    return [{"id": r[0], "name": r[1], "icon": r[2], "accountNumber": r[3]} for r in recipients]

@@ -24,10 +24,13 @@ function Login() {
   return (
     <div className="login-container">
       <header className="login-header">
-        <div className="logo">脳筋登山　送金システム</div>
+        <div className="logo">脳筋登山</div>
+        
       </header>
       <main className="login-main">
+        
         <form onSubmit={handleSubmit} className="login-form">
+          
           <div className="input-group">
             <label htmlFor="account-number">口座番号</label>
             <input
@@ -35,7 +38,7 @@ function Login() {
               id="account-number"
               value={accountNumber}
               onChange={(e) => setAccountNumber(e.target.value)}
-              placeholder="半角数字7桁"
+              placeholder="半角数字"
             />
           </div>
           <div className="input-group">
@@ -45,7 +48,7 @@ function Login() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="半角英数字・記号4〜16桁"
+              placeholder="半角英数字"
             />
           </div>
           

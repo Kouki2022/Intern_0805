@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify
 import sqlite3
 from flask_cors import CORS
-from db import get_data_sender, account_search, insert_send, balance_send, insert_past, get_all_recipients;
- 
+from db import get_data_sender, account_search, insert_send, balance_send, get_recip
+
 
 
 app = Flask(__name__)
@@ -14,23 +14,25 @@ CORS(
 )
 
 
-
-
 #ログイン時に使用
 @app.route('/account', methods=['POST'])
 def account_check():
-    account_number = request.json.get('accountNumber')
-    password = request.json.get('password')
-    
-    if not account_number or not password:
-        return jsonify({"error": "Account number and password are required"}), 400
 
-    user = account_search(account_number, password)
+    #reactからの値の取得
+    accountNumber = request.json['accountNumber']
+    password = request.json['password']
+    print(accountNumber,password)
 
-    if user:
-        return jsonify(user), 200
+    user = account_search(accountNumber, password)
+
+    # print(user)
+
+    if(user):
+        print('success\n')
+        return list(user)
     else:
-        return jsonify({"error": "Invalid account number or password"}), 401
+        print('lost\n')
+        return jsonify(), 300
 
 
 #送金時に使用
@@ -64,6 +66,31 @@ def send():
 
 
 
+@app.route('/recip', methods=['POST'])
+def recip():
+
+    #reactからの値の取得
+    id1 = request.json['id1']
+    id2 = request.json['id2']
+    id3 = request.json['id3']
+    id4 = request.json['id4']
+
+    recipient = get_recip(id1, id2, id3, id4)
+
+    print(recipient)
+
+    # print(user)
+
+    if(recipient):
+        print('success\n')
+        return list(recipient)
+    else:
+        print('lost\n')
+        return jsonify(), 300
+
+
+
+
 
 # テスト
 @app.route('/send', methods=['POST'])
@@ -79,11 +106,6 @@ def create_transaction():
 
     print(amount)
 
-
-
-    #dbにデータ追加のテスト
-    data = (15, 111, 4040, 'request', 'これが追加されたら成功', True)
-    insert_past(data)
 
 
 
@@ -103,33 +125,3 @@ def create_transaction():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-@app.route('/account', methods=['POST'])
-def account_check():
-    account_number = request.json.get('accountNumber')
-    password = request.json.get('password')
-    
-    if not account_number or not password:
-        return jsonify({"error": "Account number and password are required"}), 400
-
-    user = account_search(account_number, password)
-
-    if user:
-        # パスワードを除外してユーザー情報を返す
-        user_info = {
-            "id": user[0],
-            "user_name": user[2],
-            "balance": user[4],
-            "account_number": user[5],
-            "registered_id": user[6]
-        }
-        return jsonify(user_info), 200
-    else:
-        return jsonify({"error": "Invalid account number or password"}), 401
-    
-
-# check.py
-@app.route('/recipients', methods=['GET'])
-def get_recipients():
-    recipients = get_all_recipients()
-    return jsonify(recipients), 200

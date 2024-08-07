@@ -1,3 +1,4 @@
+
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   margin: 0;
@@ -36,9 +37,9 @@ body {
 }
 
 .action-button1 {
-  width: 100%;
+  flex: 1;
   padding: 15px;
-  margin: 10px 0;
+  margin: 10px 10px;
   border: none;
   border-radius: 5px;
   font-size: 16px;
@@ -49,6 +50,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  width:80%;
 }
 
 .send-money {
@@ -58,11 +60,9 @@ body {
 .request-money {
   background-color: #28a745;
 }
-
-.read-history {
+.read-history{
   background-color: #657fff;
 }
-
 .action-button1:hover {
   opacity: 0.9;
 }

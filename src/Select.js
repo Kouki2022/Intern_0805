@@ -10,6 +10,7 @@ import icon5 from './images/icon5.png';
 
 const Select = () => {
   const [selectedRecipients, setSelectedRecipients] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const { amount, message } = location.state || {};
@@ -30,7 +31,17 @@ const Select = () => {
     );
   };
 
-  const handleSubmit = () => {
+  /*const handleSubmit = () => {
+    alert(`選択された送金先: ${selectedRecipients.join(', ')}`);
+  };*/
+
+  const filteredRecipients = recipients.filter((recipient) =>
+    recipient.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+
+  // Select.js
+const handleSubmit = () => {
     const selectedRecipientsData = selectedRecipients.map(id => 
       recipients.find(r => r.id === id)
     );
@@ -46,38 +57,46 @@ const Select = () => {
   return (
     <div className="container">
       <div className="common-header">
-        <button className="common-back-button" onClick={() => navigate(-1)}>
-          戻る
-        </button>
-        <h1>請求先選択</h1>
+          <button className="common-back-button">
+            戻る
+          </button>
+        <h1>請求相手を選択</h1>
+      </div>
+      <div className="subheader-wrapper">
+        <h2 className="subheader">請求先選択</h2>
+      </div>
+      <div className="search-wrapper">
+        <input
+          type="text"
+          placeholder="検索..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
       <div className="recipients-list">
-        {recipients.map((recipient) => (
+        {filteredRecipients.map((recipient) => (
           <div
             key={recipient.id}
             onClick={() => handleRecipientToggle(recipient.id)}
             className={`recipient-item ${selectedRecipients.includes(recipient.id) ? 'selected' : ''}`}
           >
-            <img src={recipient.icon} alt={recipient.name} className="recipient-icon" />
             {recipient.name}
           </div>
         ))}
       </div>
-      <h2>選択リスト</h2>
+      <div className="subheader-wrapper">
+        <h2 className="subheader">選択リスト</h2>
+      </div>
       <div className="selected-recipients">
         {selectedRecipients.map((id) => {
           const recipient = recipients.find(r => r.id === id);
-          return (
-            <div key={id} className="selected-recipient-item">
-              <img src={recipient.icon} alt={recipient.name} className="recipient-icon" />
-              {recipient.name}
-            </div>
-          );
+          return <div key={id} className="selected-recipient-item">{recipient.name}</div>;
         })}
       </div>
       <button className="create-button" onClick={handleSubmit}>作成</button>
     </div>
   );
 };
+
 
 export default Select;

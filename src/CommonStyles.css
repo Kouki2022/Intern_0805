@@ -1,15 +1,37 @@
 /* src/CommonStyles.css */
-.back-button {
-  margin-top: 2px;
-  padding: 0px;
-  background: #4a4a4a;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.back-button:hover {
-  background: #0056b3;
-}
+.common-back-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 10px;
+    display: flex;
+    width: 20%;
+    position: absolute;
+  }
+  
+  .common-back-button::before {
+    content: "←";
+    margin-right: 5px;
+  }
+  
+  .common-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #4a4a4a;
+    color: white;
+    height: 44px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .common-header h1 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+  }

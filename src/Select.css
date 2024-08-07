@@ -1,0 +1,76 @@
+/* Select.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: space-between;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    margin: 10px 0 5px 0;
+  }
+  
+  .recipients-list {
+    max-height: 200px;
+    overflow-y: scroll;
+    width: 80%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .recipient-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    text-align: left;
+  }
+  
+  .recipient-item.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+  
+  .selected-recipients {
+    width: 80%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .create-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .create-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .recipient-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .selected-recipient-item {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+  }

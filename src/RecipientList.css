@@ -1,3 +1,5 @@
+@import './CommonStyles.css';
+
 .recipient-list-container {
   display: flex;
   flex-direction: column;
@@ -11,45 +13,6 @@
   box-sizing: border-box; 
 }
 
-.header3 {
-  display: flex;
-  align-items: center;
-  padding: 10px 15px;
-  background-color: #4a4a4a;
-  color: white;
-  height: 44px;
-  width: 100%;
-  box-sizing: border-box;
-  
-   /* 追加 */
-  
-}
-
-.back-button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 0;
-  margin-right: 10px;
-  position: absolute; /* 追加 */
-  left: 15px; 
-}
-
-.back-button::before {
-  content: "←";
-  margin-right: 5px;
-}
-
-.header3 h1 {
-  flex-grow: 1;
-  text-align: center;
-  margin: 0;
-  font-size: 17px;
-  font-weight: 600;
-  width: 100%;
-}
 
 .content-wrapper3 {
   flex: 1;
@@ -105,6 +68,21 @@ input[type="number"], textarea {
   cursor: pointer;
   transition: background-color 0.3s;
   box-sizing: border-box; /* 追加: パディングとボーダーを幅に含める */
+}
+
+.recipient-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.logout-button {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 /* メディアクエリを追加して、大きな画面での最大幅を制限 */

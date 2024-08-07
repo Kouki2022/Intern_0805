@@ -1,9 +1,11 @@
+// Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import './Login.css';
 
 function Login() {
+  const [branchCode, setBranchCode] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -21,28 +23,35 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h1>ログイン</h1>
-      <form onSubmit={handleSubmit} className="login-form">
-        <label htmlFor="account-number">口座番号</label>
-        <input
-          type="text"
-          id="account-number"
-          value={accountNumber}
-          onChange={(e) => setAccountNumber(e.target.value)}
-          placeholder="口座番号を入力"
-          required
-        />
-        <label htmlFor="password">パスワード</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="パスワードを入力"
-          required
-        />
-        <button type="submit" className="login-button">ログイン</button>
-      </form>
+      <header className="login-header">
+        <div className="logo">脳筋登山　送金システム</div>
+      </header>
+      <main className="login-main">
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="input-group">
+            <label htmlFor="account-number">口座番号</label>
+            <input
+              type="text"
+              id="account-number"
+              value={accountNumber}
+              onChange={(e) => setAccountNumber(e.target.value)}
+              placeholder="半角数字7桁"
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="password">ログインパスワード</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="半角英数字・記号4〜16桁"
+            />
+          </div>
+          
+          <button type="submit" className="login-button">ログイン</button>
+        </form>
+      </main>
     </div>
   );
 }

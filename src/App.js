@@ -1,15 +1,19 @@
+// App.jsx
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from './routes';
 import { AuthProvider } from './AuthContext';
+import { UserProvider } from './UserContext';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <AppRoutes />
-      </Router>
-    </AuthProvider>
+    <Router>
+      <AuthProvider>
+        <UserProvider>
+          <AppRoutes />
+        </UserProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 

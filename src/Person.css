@@ -1,0 +1,70 @@
+/* Person.css */
+
+.person-info {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .user-profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .user-icon {
+    font-size: 60px !important;
+    color: #666;
+    margin-right: 15px;
+  }
+  
+  .user-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .account-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+  }
+  
+  .account-numbers {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .account-numbers div {
+    margin-bottom: 5px;
+  }
+  
+  .balance-section {
+    text-align: right;
+  }
+  
+  .balance-amount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+  }
+  
+  .details-link {
+    display: flex;
+    align-items: center;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .details-link span {
+    margin-right: 5px;
+  }
+  
+  .details-link svg {
+    font-size: 16px;
+  }

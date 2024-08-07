@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 import './HelloWorld.css';
 import './CommonStyles.css';
+import icon1 from './images/icon1.png';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function HelloWorld() {
     const [amount, setAmount] = useState('');
     const [message, setMessage] = useState('');
     const [template, setTemplate] = useState('');
+    const [showConfirmDialog, setShowConfirmDialog] = useState(false);
     const navigate = useNavigate();
+    const { logout } = useAuth();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
     const location = useLocation();
-    const recipient = location.state?.recipient || { name: 'サンプル氏名', icon: '🧑' };
+    const recipient = location.state?.recipient || { name: 'ヤマダ イチロウ', icon: icon1 };
 
     const handleAmountChange = (event) => {
         setAmount(event.target.value);
@@ -22,47 +32,65 @@ function HelloWorld() {
     const handleTemplateChange = (event) => {
         const selectedTemplate = event.target.value;
         setTemplate(selectedTemplate);
-        setMessage(selectedTemplate); // テンプレートを選択するとメッセージフィールドに反映
+        setMessage(selectedTemplate);
     };
 
     const handleSend = () => {
         if (amount > 0 && amount <= 50000) {
-            // 送金処理が成功したと仮定
-            navigate('/completion', { 
-                state: { 
-                    amount: amount,
-                    recipient: recipient.name,
-                    message: message
-                }
-            });
+            setShowConfirmDialog(true);
         }
+    };
+
+    const handleConfirmSend = () => {
+        setShowConfirmDialog(false);
+        navigate('/completion', { 
+            state: { 
+                amount: Number(amount),
+                recipient: recipient.name,
+                message: message
+            }
+        });
+    };
+
+    const handleCancelSend = () => {
+        setShowConfirmDialog(false);
     };
 
     return (
         <div className="hello-world-container">
-            <div className="header3">
-                <button className="back-button" onClick={() => navigate('/recipients')}>
+            <div className="common-header">
+                <button className="common-back-button" onClick={() => navigate('/recipients')}>
                     戻る
                 </button>
-                <h1>送金</h1>
+                <h1>送金金額入力</h1>
+                <button className="logout-button" onClick={handleLogout}>
+                    ログアウト
+                </button>
             </div>
             <div className="content-wrapper3">
-                <h2>送金先</h2>
-                <div className="recipient">
-                    <span className="recipient-icon">{recipient.icon}</span>
-                    <h3>{recipient.name}</h3>
+                <div className="account-info">
+                    <h2>送金先</h2>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>{recipient.name}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div className="limit-info">送金上限額: 50,000円</div>
                 <div className="amount-input">
-                    <label htmlFor="amount">送金金額:</label>
+                    <label htmlFor="amount">送金金額をご入力ください。</label>
                     <input
                         type="number"
                         id="amount"
                         value={amount}
                         onChange={handleAmountChange}
-                        placeholder="円"
-                        min="1"
+                        placeholder="0"
                     />
+                    <span className="currency">円</span>
+                </div>
+                <div className="limit-info">
+                    <p>・1回あたりの送金限度額：50,000円</p>
                 </div>
                 <div className="message-input">
                     <label htmlFor="message">メッセージ:</label>
@@ -81,13 +109,25 @@ function HelloWorld() {
                     />
                 </div>
                 <button
-                    className="send-button"
+                    className="next-button"
                     onClick={handleSend}
                     disabled={!amount || amount <= 0 || amount > 50000}
                 >
-                    送金
+                    送金する
                 </button>
             </div>
+            {showConfirmDialog && (
+                <div className="confirm-dialog">
+                    <div className="confirm-dialog-content">
+                        <p>送金を実行します。</p>
+                        <p>（この操作は取り消せません。）</p>
+                        <div className="confirm-dialog-buttons">
+                            <button onClick={handleCancelSend}>キャンセル</button>
+                            <button onClick={handleConfirmSend}>OK</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

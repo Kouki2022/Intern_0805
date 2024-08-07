@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './Request.css';
 import './CommonStyles.css';
@@ -8,9 +8,12 @@ const Request = () => {
   const amountRef = useRef(null);
   const messageRef = useRef(null);
   const [amountError, setAmountError] = useState('');
+  const [template, setTemplate] = useState('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const validateAmount = (value) => {
-    if (value === '') return '';
+    if (value === '') return '請求金額を入力してください';
+    if (value.startsWith('0')) return '0から始まる数字は入力できません';
     if (!Number.isInteger(Number(value)) || Number(value) <= 0) {
       return '1円以上の整数を入力してください';
     }
@@ -23,6 +26,12 @@ const Request = () => {
   const handleAmountChange = (e) => {
     const value = e.target.value;
     setAmountError(validateAmount(value));
+  };
+
+  const handleTemplateChange = (e) => {
+    const selectedTemplate = e.target.value;
+    setTemplate(selectedTemplate);
+    messageRef.current.value = selectedTemplate;
   };
 
   const handleSubmit = (e) => {
@@ -41,6 +50,17 @@ const Request = () => {
 
     navigate('/select', { state: { amount, message } });
   }
+
+  useEffect(() => {
+    const amount = amountRef.current?.value;
+    setIsButtonDisabled(validateAmount(amount) !== '');
+  }, [amountError]);
+
+  const buttonStyle = {
+    backgroundColor: isButtonDisabled ? '#ccc' : '#e91e63',
+    color: 'white',
+    cursor: isButtonDisabled ? 'not-allowed' : 'pointer',
+  };
 
   return (
     <div className="request-container">
@@ -68,10 +88,29 @@ const Request = () => {
         </div>
         <div className='request-message-container'>
           <label htmlFor="message">メッセージ（任意）</label>
-          <textarea id="message" placeholder="飲み会代お願いします！" ref={messageRef}></textarea>
+          <div className="template-selector">
+            <select id="template" value={template} onChange={handleTemplateChange}>
+              <option value="">テンプレートを選択</option>
+              <option value="お世話になっております。">お世話になっております。</option>
+              <option value="よろしくお願いします。">よろしくお願いします。</option>
+            </select>
+          </div>
+          <textarea 
+            id="message"
+            placeholder="飲み会代お願いします！"
+            ref={messageRef}
+            value={template}
+            onChange={(e) => setTemplate(e.target.value)}
+          ></textarea>
         </div>
         <div className='request-submit-button'>
-          <button type="submit">リンクを作成</button>
+          <button 
+            type="submit" 
+            disabled={isButtonDisabled}
+            style={buttonStyle}
+          >
+            請求先を指定する
+          </button>
         </div>
       </form>
     </div>
